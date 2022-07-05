@@ -58,6 +58,7 @@ variable "activate_services" {
     "vpcaccess.googleapis.com",
     "redis.googleapis.com",
     "sqladmin.googleapis.com",
-    "billingbudgets.googleapis.com"
+    "billingbudgets.googleapis.com",
+    "servicenetworking.googleapis.com"
   ]
 }
