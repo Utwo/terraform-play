@@ -16,7 +16,7 @@ resource "google_sql_database_instance" "terra_instance" {
     availability_type = var.environment_name == "production" ? "REGIONAL" : "ZONAL"
     backup_configuration {
       enabled                        = var.environment_name == "production"
-      point_in_time_recovery_enabled = true
+      point_in_time_recovery_enabled = var.environment_name == "production"
     }
     ip_configuration {
       private_network = data.google_compute_network.default.id
