@@ -48,3 +48,15 @@ variable "billing_account_name" {
   description = "The name of the billing account"
   default     = "My Billing Account"
 }
+
+variable "activate_services" {
+  type = list(any)
+  default = [
+    "secretmanager.googleapis.com",
+    "iam.googleapis.com",
+    "vpcaccess.googleapis.com",
+    "redis.googleapis.com",
+    "sqladmin.googleapis.com",
+    "billingbudgets.googleapis.com"
+  ]
+}

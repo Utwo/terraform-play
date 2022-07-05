@@ -11,14 +11,14 @@ resource "google_storage_bucket" "assets" {
   }
 }
 
-resource "google_storage_bucket_access_control" "public_rule" {
-  bucket = google_storage_bucket.assets.name
-  role   = "READER"
-  entity = "allUsers"
-}
-
-resource "google_storage_bucket_iam_member" "member" {
+resource "google_storage_bucket_iam_member" "cloud_run_member" {
   bucket = google_storage_bucket.assets.name
   role   = "roles/storage.admin"
   member = "serviceAccount:${google_service_account.cloud_run_service_account.email}"
+}
+
+resource "google_storage_bucket_iam_member" "all_users_read" {
+  bucket = google_storage_bucket.assets.name
+  role   = "roles/storage.legacyBucketWriter"
+  member = "allUsers"
 }
