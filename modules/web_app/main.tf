@@ -6,3 +6,16 @@ terraform {
     }
   }
 }
+
+resource "random_password" "password" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+
+locals {
+  db_name     = "terradb-${var.environment_name}"
+  db_username = "admin"
+  db_password = random_password.password.result
+}
