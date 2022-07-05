@@ -8,7 +8,7 @@ resource "google_sql_database" "terra_db" {
 }
 
 resource "google_sql_database_instance" "terra_instance" {
-  name             = "terra_db"
+  name             = "terra-db"
   region           = var.app_location
   database_version = "POSTGRES_14"
   settings {

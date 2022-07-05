@@ -53,6 +53,7 @@ variable "activate_services" {
   type = list(any)
   default = [
     "secretmanager.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
     "iam.googleapis.com",
     "vpcaccess.googleapis.com",
     "redis.googleapis.com",
