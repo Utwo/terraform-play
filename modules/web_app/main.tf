@@ -13,6 +13,9 @@ resource "random_password" "password" {
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
+data "google_compute_network" "default" {
+  name = "default"
+}
 
 locals {
   db_name     = "terradb-${var.environment_name}"

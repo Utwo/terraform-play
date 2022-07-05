@@ -1,6 +1,17 @@
 resource "google_cloud_run_service" "web_app_backend" {
-  name     = "web_app_backend"
+  name     = "web-app-backend"
   location = var.app_location
+
+  metadata {
+    labels = {
+      app = var.app_name
+      env = var.environment_name
+    }
+    annotations = {
+      "run.googleapis.com/launch-stage" = "BETA"
+    }
+  }
+
 
   template {
     spec {
@@ -25,7 +36,7 @@ resource "google_cloud_run_service" "web_app_backend" {
           value = google_redis_instance.cache.host
         }
         env {
-          name  = "BCUKET_NAME"
+          name  = "BUCKET_NAME"
           value = google_storage_bucket.assets.name
         }
         env {
@@ -45,7 +56,7 @@ resource "google_cloud_run_service" "web_app_backend" {
           value_from {
             secret_key_ref {
               name = google_secret_manager_secret.db_password.secret_id
-              key  = "1"
+              key  = "2"
             }
           }
         }
@@ -69,8 +80,6 @@ resource "google_cloud_run_service" "web_app_backend" {
       }
     }
   }
-
-
 
   traffic {
     percent         = 100

@@ -1,7 +1,3 @@
-data "google_compute_network" "default" {
-  name = "default"
-}
-
 resource "google_sql_database" "terra_db" {
   name     = local.db_name
   instance = google_sql_database_instance.terra_instance.name
@@ -34,6 +30,8 @@ resource "google_sql_database_instance" "terra_instance" {
   }
 
   deletion_protection = "true"
+
+  depends_on = [google_service_networking_connection.private_vpc_connection]
 }
 
 
@@ -45,6 +43,6 @@ resource "google_sql_user" "local_user" {
 
 resource "google_sql_user" "webapp_user" {
   instance = google_sql_database_instance.terra_instance.name
-  name     = google_service_account.cloud_run_service_account.email
+  name     = google_service_account.cloud_run_service_account.account_id
   type     = "CLOUD_IAM_SERVICE_ACCOUNT"
 }
